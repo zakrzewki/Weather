@@ -79,7 +79,7 @@ def get_location(name):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Please provide treshold values")
     parser.add_argument('--location', '-l', help='City name or coordinates', default=None)
-    parser.add_argument('--max_temp', '-t',  help='Maximum value for rain temperature', type=float, default=None)
+    parser.add_argument('--max_temp', '-t',  help='Maximum value for temperature', type=float, default=None)
     parser.add_argument('--min_rainfall', '-r', help='Minimum value for rain', type=float, default=None)
     args = parser.parse_args()
 
