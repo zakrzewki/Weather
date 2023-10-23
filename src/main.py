@@ -35,13 +35,9 @@ class WeatherProcessor:
             raise Exception("Data for parsing was not collected!")
         # Case OR - "(...)received data and print alertS to stdout when(...)" states those two requirements are different
         for temp, rain, utc in zip(self.data["hourly"]['temperature_2m'], self.data["hourly"]['rain'], self.data["hourly"]['time']):
-            if rain > self.rainfall_treshold:
+            if rain > self.rainfall_treshold or temp < self.temperature_treshold :
                 print("Warning " + self.location + ", low temperature " + str(temp) + " of C and rain " + str(rain) + " mm expected on " + str(utc))
-
-        for temp, rain, utc in zip(self.data["hourly"]['temperature_2m'], self.data["hourly"]['rain'], self.data["hourly"]['time']):
-            if temp < self.temperature_treshold:
-                print("Warning " + self.location + ", low temperature " + str(temp) + " of C and rain " + str(rain) + " mm expected on " + str(utc))
-
+            
         # Case AND - from the example output it states that and should be used
         # for temp, rain, utc in zip(self.data["hourly"]['temperature_2m'], self.data["hourly"]['rain'], self.data["hourly"]['time']):
         #     if temp < self.temperature_treshold:
