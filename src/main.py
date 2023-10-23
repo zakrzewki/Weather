@@ -34,25 +34,25 @@ class WeatherProcessor:
         if self.data is None:
             raise Exception("Data for parsing was not collected!")
         # Case OR - "(...)received data and print alertS to stdout when(...)" states those two requirements are different
-        # for temp, rain, utc in zip(self.data["hourly"]['temperature_2m'], self.data["hourly"]['rain'], self.data["hourly"]['time']):
-        #     if rain > self.rainfall_treshold:
-        #         print("Warning " + args.location + ", low temperature " + str(temp) + " of C and rain " + str(rain) + " mm expected on " + str(utc))
-        #
-        # for temp, rain, utc in zip(self.data["hourly"]['temperature_2m'], self.data["hourly"]['rain'], self.data["hourly"]['time']):
-        #     if temp < self.temperature_treshold:
-        #         print("Warning " + args.location + ", low temperature " + str(temp) + " of C and rain " + str(rain) + " mm expected on " + str(utc))
+        for temp, rain, utc in zip(self.data["hourly"]['temperature_2m'], self.data["hourly"]['rain'], self.data["hourly"]['time']):
+            if rain > self.rainfall_treshold:
+                print("Warning " + self.location + ", low temperature " + str(temp) + " of C and rain " + str(rain) + " mm expected on " + str(utc))
 
-        # Case AND - from the example output it states that and should be used
         for temp, rain, utc in zip(self.data["hourly"]['temperature_2m'], self.data["hourly"]['rain'], self.data["hourly"]['time']):
             if temp < self.temperature_treshold:
-                if rain > self.rainfall_treshold:
-                    print("Warning " + self.location + ", low temperature " + str(temp) + " of C and rain " + str(rain) + " mm expected on " + str(utc))
+                print("Warning " + self.location + ", low temperature " + str(temp) + " of C and rain " + str(rain) + " mm expected on " + str(utc))
 
-        # Depreciated, slow method. 10 retries on 1 mln reruns is 10s faster for zip method
+        # Case AND - from the example output it states that and should be used
+        # for temp, rain, utc in zip(self.data["hourly"]['temperature_2m'], self.data["hourly"]['rain'], self.data["hourly"]['time']):
+        #     if temp < self.temperature_treshold:
+        #         if rain > self.rainfall_treshold:
+        #             print("Warning " + self.location + ", low temperature " + str(temp) + " of C and rain " + str(rain) + " mm expected on " + str(utc))
+
+        # Depreciated, slow method
         # for i in range(len(self.data["hourly"]['time'])):
         #     if self.data["hourly"]['temperature_2m'][i] < self.temperature_treshold:
         #         if self.data["hourly"]['rain'][i] > self.rainfall_treshold:
-        #             print("Warning " + args.location + ", low temperature " + str(self.data['hourly']['temperature_2m'][i]) + " of C and rain " + str(self.data['hourly']['rain'][i]) + " mm expected on " + str(self.data['hourly']['time'][i]))
+        #             print("Warning " + self.location + ", low temperature " + str(self.data['hourly']['temperature_2m'][i]) + " of C and rain " + str(self.data['hourly']['rain'][i]) + " mm expected on " + str(self.data['hourly']['time'][i]))
 
 
 async def runner(name, max_temp, min_rain):
