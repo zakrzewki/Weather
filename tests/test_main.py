@@ -68,14 +68,14 @@ def test_get_location_using_geopy():
 
 
 def test_runner_with_digits_in_name_no_coma():
-    name = "52.2297, 21.0122"
+    name = "52.2297 21.0122"
     lat, long = get_location(name)
     assert lat == "52.2297"
     assert long == "21.0122"
 
 
 def test_runner_with_digits_in_name_with_coma():
-    name = "52.229 21.012"
+    name = "52.229, 21.012"
     lat, long = get_location(name)
     assert lat == "52.229"
     assert long == "21.012"
